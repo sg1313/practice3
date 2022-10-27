@@ -12,7 +12,7 @@ const Home = ({ userObj }) => {
 
   useEffect(() => {
     // cloud firestore로 실시간 업데이트 가져오는 함수
-    // 컴포넌트가 amout되면 useEffect 사용
+    // 컴포넌트가 amount되면 useEffect 사용
     const q = query(
       collection(dbService, "nweets"),
       orderBy("createdAt", "desc")

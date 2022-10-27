@@ -43,9 +43,6 @@ const AuthForm = () => {
       } else if (error.code === "auth/weak-password") {
         setError("비밀번호는 최소 6자리 이상이어야 합니다.");
       }
-      // setError(
-      //   "아이디/비밀번호가 일치하지 않거나 이미 동일한 계정이 있습니다."
-      // );
     }
   };
 

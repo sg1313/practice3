@@ -6,7 +6,7 @@ import { updateProfile } from "firebase/auth";
 
 function App() {
   const [init, setInit] = useState(false); // 아직 초기화 되지 X. firebase가 초기화 되길 기다림. 초기화해서 isLoggedIn 바뀌게 해야함 -> 작업해서 init을 true값으로 바꿔줘야함
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // 현재 로그인 여부. firebase가 아직 시작안됫기 때매 로그아웃 되어있는거라고 생각함. 그래서 초기값 false
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // 현재 로그인 여부. firebase가 아직 시작안됐기 때매 로그아웃 되어있는거라고 생각함. 그래서 초기값 false
   const [userObj, setUserObj] = useState(null);
 
   // console.log(authService.currentUser);
@@ -19,9 +19,8 @@ function App() {
       //onauthStateChanged : 사용자의 로그인 상태의 변화를 관찰하는 관찰자. 현재 로그인한 사용자 가져오기!!
       // ★로그인 되면 이게 호출됨★ 그래서 로그인한 user를 받는다. ★로그인,로그아웃 할 때&App.js가 초기화될 때 일어남!!
       if (user) {
-        // 누군가 create account를 클릭하거나
+        // create account를 클릭시
         // ＊ isLoggedIn={isLoggedIn} 없애주고 boolean으로 바꿔줘서 setIsLoggedIn(true); 도 노쓸모
-
         setUserObj({
           displayName: authService.currentUser.displayName
             ? authService.currentUser.displayName

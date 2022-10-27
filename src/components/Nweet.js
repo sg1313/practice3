@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { dbService, storageService } from "../fbase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false); // 수정모드 용
@@ -13,7 +11,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
 
   const onDeleteClick = async () => {
-    // async 쓰는 이유?삭 제함수가 비동기 함수이기 때문에 async와 await을 붙여 동기적으로 실행시켜 빠르게 처리하기 위해서.... 라네
+    // async 쓰는 이유?삭제함수가 비동기 함수이기 때문에 async와 await을 붙여 동기적으로 실행시켜 빠르게 처리하기 위함
     const ok = window.confirm("트윗을 지우시겠습니까?");
     if (ok) {
       try {
@@ -32,9 +30,8 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const toggleEditing = () => setEditing((prev) => !prev); // 수정input박스 뜨면서 수정할 내용 가져옴
   // 입력한 현재의 상태 값을 반전시켜줌
   const onSubmit = async (e) => {
-    // async await 빼니까 수정내용 안뜨노
     e.preventDefault();
-    console.log(nweetObj, newNweet); // 수정했을 때 콘솔 찍어보기
+    // console.log(nweetObj, newNweet); // 수정했을 때 작동되는지 콘솔에 확인하기
     await updateDoc(NweetTextRef, {
       text: newNweet,
     });
@@ -44,7 +41,7 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const onChange = (e) => {
     const {
       target: { value },
-    } = e; // 이걸 안하면 인풋박스 안에있는 글자가 안지워짐,,
+    } = e; // 수정할 때 인풋박스 안에 있는 내용 지울 수 있도록 하기
     setNewNweet(value);
   };
 
@@ -76,7 +73,6 @@ const Nweet = ({ nweetObj, isOwner, userObj }) => {
           <h5>작성자 : {nweetObj.author}</h5>
           <h5>{nweetObj.createdAt}</h5>
           {nweetObj.attachmentURL && <img src={nweetObj.attachmentURL} />}
-          {/* attachmentURL이 있을 때만 실행됨 */}
           <h4>{nweetObj.text}</h4>
           {isOwner && (
             <div className="nweet__actions">
