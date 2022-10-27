@@ -50,7 +50,7 @@ const Profile = ({ refreshUser, userObj, nweetObj }) => {
   useEffect(() => {
     const q = query(
       collection(dbService, "nweets"),
-      orderBy("createdAt", "desc"),
+      orderBy("timestamp", "desc"),
       where("creatorId", "==", userObj.uid)
     );
     onSnapshot(

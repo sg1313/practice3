@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const authService = getAuth(); // --- firebase 인증모듈
 
-const auth = getAuth(app); // 파이서베이스 연동하기 위한 함수,
+const auth = getAuth(app); // 파이어베이스 연동하기 위한 함수,
 //소셜, 이메일+비번 로그인시 필요,
 
 export { app, auth };

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { storageService, dbService, authService } from "../fbase";
 import { ref, uploadString, getDownloadURL } from "@firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid"; // uuid는 기본적으로 어떤 특별한 식별자를 랜덤으로 생성해줌. 사진에 이름 붙이기 위해 설치해줌.
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -37,6 +37,7 @@ const NweetFactory = ({ userObj }) => {
       let todayDate = now.getDate();
       let hours = now.getHours();
       let minutes = now.getMinutes();
+      let seconds = now.getSeconds();
 
       return (
         year +
@@ -48,7 +49,9 @@ const NweetFactory = ({ userObj }) => {
         hours +
         "시 " +
         minutes +
-        "분"
+        "분 " +
+        seconds +
+        "초"
       );
     };
 
@@ -59,6 +62,7 @@ const NweetFactory = ({ userObj }) => {
       creatorId: userObj.uid,
       attachmentURL,
       author: authService.currentUser.displayName,
+      timestamp: serverTimestamp(),
     };
 
     await addDoc(collection(dbService, "nweets"), nweetObj);
