@@ -42,7 +42,7 @@ const Profile = ({ refreshUser, userObj, nweetObj }) => {
     }
   };
 
-  // ------------------ 내 트윗 가져오기 -------------------------------------------
+  // ------------------ 내 트윗 가져오기 -----------------------------------------
   const auth = getAuth();
   const user = auth.currentUser;
   const uid = user.uid;
